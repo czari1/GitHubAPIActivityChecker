@@ -1,4 +1,3 @@
-import sys
 import argparse
 from utilities import fetch_github_activity, format_activity
 
@@ -9,7 +8,7 @@ def main():
     parser.add_argument("-d", "--days", type=int, default=30, 
                         help="Number of days to fetch activity for(default: 30, o for all available)")
     parser.add_argument("-l", "--limit", type=int, default=10,
-                        help="Limit the number of events to display (default: 5, 0 for all avalailable)")
+                        help="Limit the number of events to display (default: 10, 0 for all avalailable)")
     
     args = parser.parse_args()
 
