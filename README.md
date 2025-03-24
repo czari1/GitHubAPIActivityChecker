@@ -32,28 +32,28 @@ python main.py <username> [-d DAYS] [-l LIMIT]
 
 ### Examples
 
-Fetch activity for user `octocat` for the last 30 days (default):
+Fetch activity for user `user1` for the last 30 days (default):
 
 ```sh
-python main.py octocat
+python main.py user1
 ```
 
-Fetch activity for user `octocat` for the last 7 days:
+Fetch activity for user `user1` for the last 7 days:
 
 ```sh
-python main.py octocat -d 7
+python main.py user1 -d 7
 ```
 
-Fetch all available activity for user `octocat`:
+Fetch all available activity for user `user1`:
 
 ```sh
-python main.py octocat -d 0
+python main.py user1 -d 0
 ```
 
-Fetch activity for user `octocat` and display only the last 5 events:
+Fetch activity for user `user1` and display only the last 5 events:
 
 ```sh
-python main.py octocat -l 5
+python main.py user1 -l 5
 ```
 
 ## Functions
