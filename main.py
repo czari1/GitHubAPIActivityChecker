@@ -1,5 +1,6 @@
 import argparse
 from utilities import fetch_github_activity, format_activity
+from plots import plot_activity_overview, generate_activity_report, export_events_to_csv
 
 def main():
     """Main function with command line arguments for time frame and limit"""
@@ -9,6 +10,9 @@ def main():
                         help="Number of days to fetch activity for(default: 30, o for all available)")
     parser.add_argument("-l", "--limit", type=int, default=10,
                         help="Limit the number of events to display (default: 10, 0 for all avalailable)")
+    parser.add_argument("--plot", action="store_true", help="Generate plots for activity overview")
+    parser.add_argument("--report", action="store_true", help="Generate activity report")
+    parser.add_argument("--export", action="store_true", help="Export events to CSV file")
     
     args = parser.parse_args()
 
@@ -31,8 +35,20 @@ def main():
             if i >= args.limit:
                 break
             print(format_activity(event))
+        
         if len(events) > args.limit:
             print(f"Showing {args.limit} out of {len(events)} events. Use --limit to display more")
+
+        if args.plot:
+            plot_activity_overview(events)
+
+        if args.report:
+            report = generate_activity_report(events, args.username)
+            print("\n" +report)
+
+        if args.export:
+            export_events_to_csv(events, args.username)
+
     else:
         print("No activity found")
 

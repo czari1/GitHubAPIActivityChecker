@@ -24,6 +24,9 @@ def fetch_github_activity(username: str, days: int = 30, token: str = None):
         while url:
             response = requests.get(url, headers=headers, params=params)
             if response.status_code == 200:
+                remaining_requests = response.headers.get('X-RateLimit-Remaining', 'Unknown')
+                print(f"API requests remaining: {remaining_requests}")
+
                 events = response.json()
                 all_events.extend(events)
                 # Check if there is a next page
@@ -33,6 +36,10 @@ def fetch_github_activity(username: str, days: int = 30, token: str = None):
                     break
             elif response.status_code == 404:
                 print(f"Error: User {username} not found")
+                return None
+            elif response.status_code == 403:
+                print("Error: API rate limit exceeded")
+                print("Wait for some time or provide a personal access token to increase the limit")
                 return None
             else:
                 print(f"Error: HTTP error occurred: {response.status_code}")
